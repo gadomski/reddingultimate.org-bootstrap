@@ -40,5 +40,17 @@ module Nesta
         html << haml(short_name.to_sym, :layout => false, :locals => locals)
       end
     end
+
+    def disclaimer(page = nil)
+      page ||= @page
+      disclaimer = page.metadata('disclaimer')
+      if not disclaimer
+        return ""
+      end
+      view = "disclaimers/#{disclaimer}"
+
+      html = haml(view.to_sym, :layout => false)
+      return html
+    end
   end
 end
